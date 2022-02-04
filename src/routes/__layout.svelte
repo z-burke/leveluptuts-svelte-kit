@@ -1,10 +1,11 @@
 <script>
     import Header from '$lib/header.svelte';
+    import '../tailwind.css';
 </script>
 
 <Header />
 
-<main>
+<main class="bg-blue-400">
     <slot />
 </main>
 
@@ -12,8 +13,8 @@
 
 
 <!-- Svelte CSS is scoped by default -->
-<style>
+<!-- <style>
     :global(header) {
         background: red;
     }
-</style>
+</style> -->
