@@ -1,22 +1,34 @@
 <script context="module">
     export async function load({ params }) {
-        const Hello = (await import(`../../posts/${params.slug}.md`));
-        // console.log('Hello', Hello);
-        return {
-            props: {
-                Hello: Hello.default,
-                title: Hello.metadata.title
-            }
+        try {
+            const Post = await import(`../../posts/${params.slug}.md`);
+            return {
+                // Data passed into Svelte component
+                props: {
+                    Post: Post.default
+                }
+            };
+        } catch (e) {
+            // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+            // Redirect Example
+            // return {
+            //     status: 307,
+            //     redirect: '/posts'
+            // }
+            // For status to work
+            // We need the correct outputs
+            // 404 needs error message
+            // Redirects need status and redirect
+            return {
+                status: 404,
+                error: 'Post not found'
+            };
         }
     }
 </script>
 
 <script>
-    // import Hello from '../../posts/hello.md';
-    export let Hello;
-    export let title;
+    export let Post;
 </script>
 
-<h2>{title}</h2>
-
-<Hello />
+<Post />
