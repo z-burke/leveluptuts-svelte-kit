@@ -31,4 +31,4 @@
     export let Post;
 </script>
 
-<Post />
+<svelte:component this={Post}/>
